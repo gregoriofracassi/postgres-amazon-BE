@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  const Author = sequelize.define("author", {
+  const User = sequelize.define("user", {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -13,10 +13,6 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    avatar: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
   })
-  return Author
+  return User
 }

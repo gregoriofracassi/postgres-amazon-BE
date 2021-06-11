@@ -1,14 +1,10 @@
 export default (sequelize, DataTypes) => {
-  const Comment = sequelize.define("comment", {
+  const Cart = sequelize.define("cart", {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    content: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
   })
-  return Comment
+  return Cart
 }

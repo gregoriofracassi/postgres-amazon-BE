@@ -1,14 +1,14 @@
 import express from "express"
 const route = express.Router()
 
-import blogsRoute from "./blogs/index.js"
-import authorsRoute from "./authors/index.js"
-import commentsRoute from "./comments/index.js"
-import categoriesRoute from "./categories/index.js"
+import productsRoute from "./products/index.js"
+import cartsRoute from "./carts/index.js"
+import reviewsRoute from "./reviews/index.js"
+import usersRoute from "./users/index.js"
 
-route.use("/blogs", blogsRoute)
-route.use("/authors", authorsRoute)
-route.use("/comments", commentsRoute)
-route.use("/categories", categoriesRoute)
+route.use("/products", productsRoute)
+route.use("/carts", cartsRoute)
+route.use("/reviews", reviewsRoute)
+route.use("/users", usersRoute)
 
 export default route

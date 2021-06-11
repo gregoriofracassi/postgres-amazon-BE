@@ -1,22 +1,16 @@
 import express from "express"
 import models from "../../db/index.js"
-const Author = models.Author
-const Blog = models.Blog
-const Category = models.Category
-const Comment = models.Comment
+const User = models.User
+const Product = models.Product
+const Cart = models.Cart
+const Review = models.Review
 const router = express.Router()
 
 router
   .route("/")
   .get(async (req, res, next) => {
     try {
-      const data = await Blog.findAll({
-        include: [
-          { model: Category },
-          { model: Comment, include: { model: Author } },
-          { model: Author },
-        ],
-      })
+      const data = await User.findAll()
       res.send(data)
     } catch (e) {
       console.log(e)
@@ -24,7 +18,7 @@ router
   })
   .post(async (req, res, next) => {
     try {
-      const data = await Blog.create(req.body)
+      const data = await User.create(req.body)
       res.send(data)
     } catch (e) {
       console.log(e)
@@ -35,12 +29,8 @@ router
   .route("/:id")
   .get(async (req, res, next) => {
     try {
-      const data = await Blog.findByPk(req.params.id, {
-        include: [
-          { model: Category },
-          { model: Comment, include: { model: Author } },
-          { model: Author },
-        ],
+      const data = await User.findByPk(req.params.id, {
+        include: { model: Cart, include: { model: Product } },
       })
       res.send(data)
     } catch (e) {
@@ -49,7 +39,7 @@ router
   })
   .delete(async (req, res, next) => {
     try {
-      const row = await Blog.destroy({ where: { id: req.params.id } })
+      const row = await User.destroy({ where: { id: req.params.id } })
       if (row > 0) {
         res.send("ok")
       } else {
@@ -61,7 +51,7 @@ router
   })
   .put(async (req, res, next) => {
     try {
-      const data = await Blog.update(req.body, {
+      const data = await User.update(req.body, {
         where: { id: req.params.id },
         returning: true,
       })

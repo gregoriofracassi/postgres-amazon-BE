@@ -1,13 +1,16 @@
 import express from "express"
 import models from "../../db/index.js"
-const Category = models.Category
+const User = models.User
+const Product = models.Product
+const Cart = models.Cart
+const Review = models.Review
 const router = express.Router()
 
 router
   .route("/")
   .get(async (req, res, next) => {
     try {
-      const data = await Category.findAll()
+      const data = await Product.findAll()
       res.send(data)
     } catch (e) {
       console.log(e)
@@ -15,7 +18,7 @@ router
   })
   .post(async (req, res, next) => {
     try {
-      const data = await Category.create(req.body)
+      const data = await Product.create(req.body)
       res.send(data)
     } catch (e) {
       console.log(e)
@@ -26,7 +29,9 @@ router
   .route("/:id")
   .get(async (req, res, next) => {
     try {
-      const data = await Category.findByPk(req.params.id)
+      const data = await Product.findByPk(req.params.id, {
+        include: { model: Review, include: { model: User } },
+      })
       res.send(data)
     } catch (e) {
       console.log(e)
@@ -34,7 +39,7 @@ router
   })
   .delete(async (req, res, next) => {
     try {
-      const row = await Category.destroy({ where: { id: req.params.id } })
+      const row = await Product.destroy({ where: { id: req.params.id } })
       if (row > 0) {
         res.send("ok")
       } else {
@@ -46,7 +51,7 @@ router
   })
   .put(async (req, res, next) => {
     try {
-      const data = await Category.update(req.body, {
+      const data = await Product.update(req.body, {
         where: { id: req.params.id },
         returning: true,
       })

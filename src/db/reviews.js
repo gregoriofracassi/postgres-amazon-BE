@@ -1,14 +1,18 @@
 export default (sequelize, DataTypes) => {
-  const Category = sequelize.define("category", {
+  const Review = sequelize.define("review", {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    category: {
+    review: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    rate: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   })
-  return Category
+  return Review
 }

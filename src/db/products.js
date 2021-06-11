@@ -1,30 +1,34 @@
 export default (sequelize, DataTypes) => {
-  const Blog = sequelize.define("blog", {
+  const Product = sequelize.define("product", {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    title: {
+    name: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    cover: {
+    brand: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    read_time_value: {
+    imageUrl: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    price: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    read_time_unit: {
+    category: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    content: {
+    description: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
   })
-  return Blog
+  return Product
 }

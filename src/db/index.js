@@ -58,8 +58,7 @@ models.Cart.belongsTo(models.Product)
 
 // products and users thru reviews
 models.User.belongsToMany(models.Product, {
-  through: models.Review,
-  unique: false,
+  through: { model: models.Review, unique: false },
 })
 models.Product.belongsToMany(models.User, {
   through: models.Review,
